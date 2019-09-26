@@ -16,5 +16,5 @@ export default function Screen ({}: Props) {
   )
 }
 Screen.navigationOptions = {
-  header: (props) => <Header {...props} />
+  header: (props) => <Header title='Home' {...props} />
 }

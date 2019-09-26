@@ -11,11 +11,15 @@ interface Props {
 }
 function Header ({ navigation, title = 'Diet Doctor', subtitle, icon = 'menu' }: Props) {
   return (
-    <Appbar.Header style={{ zIndex: 100 }} theme={{ colors: { primary: '#fff' } }}>
+    <Appbar.Header theme={{ colors: { primary: '#fff' } }}>
       <Appbar.Action icon={icon} onPress={navigation.openDrawer} />
       <Appbar.Content title={title} subtitle={subtitle} />
-      <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => navigation.navigate('Profile')}>
-        <Avatar.Image size={40} source={require('src/assets/images/robot-dev.png')} />
+      <TouchableOpacity
+        style={{ marginRight: 10 }}
+        onPress={() => navigation.navigate('Profile')}
+        activeOpacity={0.8}
+      >
+        <Avatar.Image style={{ borderWidth: 1, borderColor: '#333', padding: 1 }} size={40} source={require('src/assets/images/robot-dev.png')} />
       </TouchableOpacity>
     </Appbar.Header>
   )
