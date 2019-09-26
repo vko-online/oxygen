@@ -1,9 +1,20 @@
 import React from 'react'
 import { Platform } from 'react-native'
 import { Appbar, IconButton, Colors } from 'react-native-paper'
-import { createStackNavigator, StackNavigatorConfig, createDrawerNavigator } from 'react-navigation'
+import {
+  createStackNavigator,
+  StackNavigatorConfig,
+  createDrawerNavigator,
+  createBottomTabNavigator,
+  BottomTabBar
+} from 'react-navigation'
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
 
 import Home from 'src/screens/Home'
+import PastScene from 'src/screens/Home/scene.past'
+import TodayScene from 'src/screens/Home/scene.today'
+import UpcomingScene from 'src/screens/Home/scene.upcoming'
+
 import ScheduleScreen from 'src/screens/Schedule'
 import AgendaScreen from 'src/screens/Agenda'
 import FriendsScreen from 'src/screens/Friends'
@@ -13,17 +24,23 @@ import AboutScreen from 'src/screens/About'
 import ProfileScreen from 'src/screens/Profile'
 
 import Drawer from './drawer'
+import Header from './tabbar'
 
+const TabBarComponent = props => <BottomTabBar {...props} />
 const config: StackNavigatorConfig = Platform.select<StackNavigatorConfig>({
   web: { headerMode: 'screen' },
   default: {}
 })
 
-const HomeStack: any = createStackNavigator(
+const HomeStack: any = createBottomTabNavigator(
   {
-    Home
-  },
-  config
+    Past: PastScene,
+    Today: TodayScene,
+    Upcoming: UpcomingScene
+  }, {
+    swipeEnabled: true,
+    tabBarComponent: () => <Header />
+  }
 )
 
 HomeStack.navigationOptions = {

@@ -1,12 +1,12 @@
 import React, { ReactNode } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native'
 
-interface Props {
+interface Props extends ViewStyle {
   children?: ReactNode
 }
-export default function Page ({ children }: Props) {
+export default function Page ({ children, ...other }: Props) {
   return (
-    <View style={s.container}>
+    <View style={[s.container, other]}>
       {children}
     </View>
   )
