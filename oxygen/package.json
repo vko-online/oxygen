@@ -8,8 +8,11 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@ant-design/react-native": "^3.1.15",
+    "@react-native-community/viewpager": "^1.1.7",
     "@react-navigation/web": "^1.0.0-alpha.9",
     "@types/faker": "^4.1.5",
+    "deepmerge": "^4.0.0",
     "expo": "^35.0.0",
     "expo-asset": "~7.0.0",
     "expo-font": "~7.0.0",
@@ -30,6 +33,7 @@
     "react-navigation": "3.11.0",
     "react-navigation-fluid-transitions": "^0.3.2",
     "react-navigation-tabs": "^2.5.5",
+    "rn-viewpager": "^1.2.9",
     "view-on-steroids": "^1.6.4"
   },
   "devDependencies": {

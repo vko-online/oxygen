@@ -47,7 +47,9 @@ async function loadResourcesAsync () {
       'opensans-light-italic': require('src/assets/fonts/OpenSans-LightItalic.ttf'),
       'opensans-regular': require('src/assets/fonts/OpenSans-Regular.ttf'),
       'opensans-semi-bold': require('src/assets/fonts/OpenSans-SemiBold.ttf'),
-      'opensans-semi-bold-italic': require('src/assets/fonts/OpenSans-SemiBoldItalic.ttf')
+      'opensans-semi-bold-italic': require('src/assets/fonts/OpenSans-SemiBoldItalic.ttf'),
+      'antoutline': require('@ant-design/icons-react-native/fonts/antoutline.ttf'),
+      'antfill': require('@ant-design/icons-react-native/fonts/antfill.ttf')
     })
   ])
 }

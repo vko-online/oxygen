@@ -3,18 +3,17 @@ import { Text, Title } from 'react-native-paper'
 import { NavigationScreenProp } from 'react-navigation'
 import Header from 'src/components/Header'
 import Page from 'src/components/Page'
+import { Event } from './data'
+import List from './list'
+import { extraExtraLightGray } from 'src/constants/Colors'
 
 interface Props {
-  navigation: NavigationScreenProp<any, any>
+  events: Event[]
 }
-export default function Screen ({}: Props) {
+export default function Scene ({ events }: Props) {
   return (
     <Page>
-      <Title>Screen</Title>
-      <Text>Not implemented</Text>
+      <List events={events} />
     </Page>
   )
-}
-Screen.navigationOptions = {
-  header: (props) => <Header title='Friends' {...props} />
 }
