@@ -27,13 +27,13 @@ function DrawerComponent ({ navigation }: Props) {
       <User />
       <Drawer.Section title='Events'>
         <Drawer.Item label='Home' icon='home' onPress={() => navigation.navigate('Home')} />
-        <Drawer.Item label='Schedule' icon='schedule' onPress={() => navigation.navigate('Schedule')} />
+        <Drawer.Item label='Schedule' icon='eventbrite' onPress={() => navigation.navigate('Schedule')} />
         <Drawer.Item label='Agenda' icon='view-agenda' onPress={() => navigation.navigate('Agenda')} />
-        <Drawer.Item label='Friends' icon='perm-contact-calendar' onPress={() => navigation.navigate('Friends')} />
+        <Drawer.Item label='Friends' icon='calendar' onPress={() => navigation.navigate('Friends')} />
         <Drawer.Item label='Map' icon='map' onPress={() => navigation.navigate('Map')} />
       </Drawer.Section>
       <Drawer.Section title='Preferences'>
-        <Drawer.Item label='Info' icon='info' />
+        <Drawer.Item label='Info' icon='information' />
         <Drawer.Item label='Settings' icon='settings' />
       </Drawer.Section>
       <Drawer.Item label='Log out' icon='exit-to-app' onPress={() => setVisiblity(true)} />

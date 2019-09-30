@@ -1,48 +1,70 @@
 import React, { ReactNode } from 'react'
-import { TextStyle, TextProps, StyleSheet, View } from 'react-native'
-import { Text, IconButton } from 'react-native-paper'
-import { darkGray } from 'src/constants/Colors'
+import { TextStyle, TextProps, StyleSheet, View, ViewStyle } from 'react-native'
+import { Button, TouchableRipple, Text, IconButton } from 'react-native-paper'
+import { darkGray, primary } from 'src/constants/Colors'
 import { Hpane } from 'view-on-steroids'
 
-interface Props extends TextProps {
+interface Props {
   icon: string
-  style?: TextStyle
+  style?: ViewStyle
+  labelStyle?: TextStyle
+  onPress?: () => void
   children: string
 }
-export function Meta ({ icon, style, children, ...other }: Props) {
+export function Address ({ icon, style, labelStyle, children, ...other }: Props) {
   return (
-    <Hpane alignItems='center' justifyContent='flex-start'>
-      <IconButton icon={icon} color={darkGray} style={s.icon} size={20} />
-      <Text {...other} style={[s.text, style]}>{children}</Text>
-    </Hpane>
+    <Button
+      compact
+      uppercase={false}
+      icon={icon}
+      color={darkGray}
+      style={[{ alignItems: 'flex-start' }, style]}
+      labelStyle={labelStyle}
+      {...other}
+    >
+      {children}
+    </Button>
+  )
+}
+
+export function EventDate ({ style, children, labelStyle, ...other }: Omit<Props, 'icon'>) {
+  return (
+    <Button
+      compact
+      uppercase={false}
+      icon='calendar'
+      color={primary}
+      size={20}
+      style={[{ alignItems: 'flex-start' }, style]}
+      labelStyle={labelStyle}
+      {...other}
+    >
+      {children}
+    </Button>
   )
 }
 
 interface CategoryProps {
   color: string
   children: string
+  onPress?: () => void
 }
-export function Category ({ color, children }: CategoryProps) {
+export function Category ({ color, children, onPress }: CategoryProps) {
   return (
-    <Hpane alignItems='center' justifyContent='flex-start' marginLeft={9}>
-      <View style={[s.circle, { backgroundColor: `#${intToRGB(hashCode(children))}` }]} />
-      <Text style={s.chip}>{children}</Text>
-    </Hpane>
+    <Button
+      compact
+      uppercase={false}
+      icon={() => <View style={[s.circle, { backgroundColor: `#${intToRGB(hashCode(children))}` }]} />}
+      color={darkGray}
+      style={{ alignItems: 'flex-start' }}
+      onPress={onPress}
+    >
+      {children}
+    </Button>
   )
 }
 
 const s = StyleSheet.create({
-  icon: {
-    margin: 0
-  },
-  text: {
-    fontSize: 14,
-    color: darkGray
-  },
-  chip: {
-    color: darkGray,
-    fontSize: 12
-  },
   circle: {
     height: 10,
     width: 10,

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Appbar, Avatar } from 'react-native-paper'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
@@ -25,4 +25,20 @@ function Header ({ navigation, title = 'Diet Doctor', subtitle, icon = 'menu' }:
   )
 }
 
+interface HeaderWithBackProps {
+  title?: string
+  subtitle?: string
+  navigation: NavigationScreenProp<any, any>
+  rightItem?: ReactNode
+}
+function _HeaderWithBack ({ navigation, title = 'Diet Doctor', subtitle, rightItem }: HeaderWithBackProps) {
+  return (
+    <Appbar.Header theme={{ colors: { primary: '#fff' } }}>
+      <Appbar.BackAction onPress={() => navigation.goBack()} />
+      <Appbar.Content title={title} subtitle={subtitle} />
+      {rightItem}
+    </Appbar.Header>
+  )
+}
+export const HeaderWithBack = withNavigation(_HeaderWithBack)
 export default withNavigation(Header)

@@ -6,10 +6,14 @@ import {
   StackNavigatorConfig,
   createDrawerNavigator
 } from 'react-navigation'
+import {
+  createFluidNavigator
+} from 'react-navigation-fluid-transitions'
 
 import HomeScreen from 'src/screens/Home'
 
 import ScheduleScreen from 'src/screens/Schedule'
+import ScheduleViewScreen from 'src/screens/ScheduleView'
 import AgendaScreen from 'src/screens/Agenda'
 import FriendsScreen from 'src/screens/Friends'
 import MapScreen from 'src/screens/Map'
@@ -42,9 +46,10 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = ''
 
-const ScheduleStack: any = createStackNavigator(
+const ScheduleStack: any = createFluidNavigator(
   {
-    Schedule: ScheduleScreen
+    Schedule: ScheduleScreen,
+    ScheduleView: ScheduleViewScreen
   },
   config
 )
@@ -52,9 +57,9 @@ const ScheduleStack: any = createStackNavigator(
 ScheduleStack.navigationOptions = {
   tabBarIcon: ({ focused }) => {
     if (focused) {
-      return <IconButton icon='schedule' color={Colors.grey600} />
+      return <IconButton icon='eventbrite' color={Colors.grey600} />
     }
-    return <IconButton icon='schedule' color={Colors.grey300} />
+    return <IconButton icon='eventbrite' color={Colors.grey300} />
   }
 }
 

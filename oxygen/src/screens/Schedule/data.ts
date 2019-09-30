@@ -5,10 +5,21 @@ export function getCategory () {
   return faker.random.arrayElement(cats)
 }
 
+export function getImage () {
+  return {
+    title: faker.lorem.words(2),
+    thumbnail: faker.image.imageUrl(400, 200, undefined, true)
+  }
+}
+
 export type Category = string
 export type EventDates = {
   start: Date
   end?: Date
+}
+export type EventImage = {
+  title?: string
+  thumbnail: string
 }
 export interface Event {
   id: string
@@ -18,6 +29,7 @@ export interface Event {
   date: EventDates
   address: string
   reservable: boolean
+  images: EventImage[]
 }
 
 export function getEvent (): Event {
@@ -32,10 +44,19 @@ export function getEvent (): Event {
       end: faker.random.boolean() && faker.date.future(0, future)
     },
     address: faker.address.streetAddress(),
-    reservable: faker.random.boolean()
+    reservable: faker.random.boolean(),
+    images: Array.from({ length: faker.random.number({ min: 3, max: 6 }) }, getImage)
   }
 }
 
 export function genEvents (): Event[] {
   return Array.from({ length: faker.random.number({ min: 20, max: 30 }) }, getEvent)
+}
+
+const cache = genEvents()
+export function find () {
+  return cache
+}
+export function findById (id) {
+  return cache.find(v => v.id === id)
 }

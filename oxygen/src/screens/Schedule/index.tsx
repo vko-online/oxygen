@@ -10,25 +10,25 @@ import PastScene from './scene.past'
 
 import List from './list'
 
-import { genEvents } from './data'
+import { find } from './data'
 
-const events = genEvents()
+const events = find()
 interface Props {
   navigation: NavigationScreenProp<any, any>
 }
-export default function Screen ({}: Props) {
+export default function Screen ({ navigation }: Props) {
   const tabs = [
-    { title: 'Past' },
     { title: 'Today' },
-    { title: 'Upcoming' }
+    { title: 'Past' }
+    // { title: 'Upcoming' }
   ]
   return (
     <Page>
       <Header title='Schedule' />
-      <Tabs tabs={tabs} initialPage={1}>
+      <Tabs tabs={tabs} initialPage={0}>
+        <List events={events} navigation={navigation} />
         <PastScene />
-        <List events={events} />
-        <UpcomingScene />
+        {/* <UpcomingScene /> */}
       </Tabs>
     </Page>
   )
