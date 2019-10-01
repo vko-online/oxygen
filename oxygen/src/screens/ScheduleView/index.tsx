@@ -1,6 +1,6 @@
 import React from 'react'
-import { FlatList } from 'react-native'
-import { Text, Title, Paragraph, Subheading, Button, Theme, Headline } from 'react-native-paper'
+import { FlatList, View } from 'react-native'
+import { Text, Title, Paragraph, Subheading, Button, Theme, Headline, IconButton } from 'react-native-paper'
 import { NavigationScreenProp } from 'react-navigation'
 import { Transition } from 'react-navigation-fluid-transitions'
 import Header, { HeaderWithBack } from 'src/components/Header'
@@ -11,6 +11,7 @@ import Pane, { Hpane } from 'view-on-steroids'
 import moment from 'moment'
 import Divider from './divider'
 import Carousel from './carousel2'
+import { primary } from 'src/constants/Colors'
 
 const FORMAT = 'ddd. MMM DD, HH:MM'
 
@@ -34,15 +35,29 @@ export default function Screen ({ navigation }: Props) {
     eventDate += `${endDate && endDate.format(' - HH:MM')}`
   }
   return (
-    <Page>
-      <HeaderWithBack title={event.title} />
-      <Carousel images={event.images} />
+    <Page scroll>
+      <HeaderWithBack title='' />
+      <Transition shared='image'>
+        <View style={{ flex: 1, maxHeight: 200 }}>
+          <Carousel images={event.images} />
+        </View>
+      </Transition>
       <Pane paddingHorizontal={20} paddingTop={10}>
         <Transition shared='title'>
-          <Headline>{event.title.charAt(0).toUpperCase() + event.title.slice(1)}</Headline>
+          <View>
+            <Hpane alignItems='center'>
+              <Subheading>{event.title.charAt(0).toUpperCase() + event.title.slice(1)}</Subheading>
+              <Hpane justifyContent='flex-end' alignItems='center'>
+                <IconButton icon='share' onPress={() => null} color={primary} />
+                <Button icon='chat' onPress={() => null}>Discussion</Button>
+              </Hpane>
+            </Hpane>
+          </View>
         </Transition>
         <Divider />
-        <Paragraph>{event.description}</Paragraph>
+        <Transition shared='description'>
+          <Paragraph>{event.description}</Paragraph>
+        </Transition>
         <Divider />
         <EventDate labelStyle={{ fontSize: 14 }}>
           {eventDate}

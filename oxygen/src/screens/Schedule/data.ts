@@ -1,14 +1,14 @@
 import faker from 'faker'
 
-const cats = ['sport', 'festival', 'movie', 'tourism', 'trip']
+export const categories = ['sport', 'festival', 'movie', 'tourism', 'trip']
 export function getCategory () {
-  return faker.random.arrayElement(cats)
+  return faker.random.arrayElement(categories)
 }
 
 export function getImage () {
   return {
     title: faker.lorem.words(2),
-    thumbnail: faker.image.imageUrl(400, 200, undefined, true)
+    thumbnail: faker.image.imageUrl(400, 200, undefined, false)
   }
 }
 
@@ -37,7 +37,7 @@ export function getEvent (): Event {
   return {
     id: faker.random.uuid(),
     title: faker.lorem.words(2),
-    description: faker.lorem.paragraph(),
+    description: faker.lorem.paragraph(3),
     categories: Array.from({ length: faker.random.number({ min: 1, max: 3 }) }, getCategory),
     date: {
       start: faker.date.recent(10),
@@ -45,7 +45,7 @@ export function getEvent (): Event {
     },
     address: faker.address.streetAddress(),
     reservable: faker.random.boolean(),
-    images: Array.from({ length: faker.random.number({ min: 3, max: 6 }) }, getImage)
+    images: Array.from({ length: faker.random.number({ min: 0, max: 2 }) }, getImage)
   }
 }
 
@@ -54,6 +54,7 @@ export function genEvents (): Event[] {
 }
 
 const cache = genEvents()
+
 export function find () {
   return cache
 }

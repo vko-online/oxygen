@@ -6,6 +6,7 @@ import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
 import { theme } from 'src/constants/Colors'
 import AppNavigator from 'src/navigation/AppNavigator'
+import Modal from 'modal-react-native-web'
 
 YellowBox.ignoreWarnings(['Require cycle'])
 export default function App (props) {
@@ -63,6 +64,8 @@ function handleLoadingError (error) {
 function handleFinishLoading (setLoadingComplete) {
   setLoadingComplete(true)
 }
+
+Modal.setAppElement(document.body)
 
 const styles = StyleSheet.create({
   container: {

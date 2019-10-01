@@ -49,12 +49,16 @@ interface CategoryProps {
   children: string
   onPress?: () => void
 }
+
+export function categoryIcon (name: string) {
+  return <View style={[s.circle, { backgroundColor: `#${intToRGB(hashCode(name))}` }]} />
+}
 export function Category ({ color, children, onPress }: CategoryProps) {
   return (
     <Button
       compact
       uppercase={false}
-      icon={() => <View style={[s.circle, { backgroundColor: `#${intToRGB(hashCode(children))}` }]} />}
+      icon={() => categoryIcon(children)}
       color={darkGray}
       style={{ alignItems: 'flex-start' }}
       onPress={onPress}
@@ -73,7 +77,7 @@ const s = StyleSheet.create({
   }
 })
 
-function hashCode (str: string) { // java String#hashCode
+export function hashCode (str: string) { // java String#hashCode
   let hash = 0
   for (let i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash)
@@ -81,7 +85,7 @@ function hashCode (str: string) { // java String#hashCode
   return hash
 }
 
-function intToRGB (i: number) {
+export function intToRGB (i: number) {
   let c = (i & 0x00FFFFFF)
       .toString(16)
       .toUpperCase()

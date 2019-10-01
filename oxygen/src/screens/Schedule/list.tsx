@@ -4,9 +4,10 @@ import {
   SectionListRenderItemInfo,
   SectionListData,
   StyleSheet,
-  FlatList
+  FlatList,
+  Image
 } from 'react-native'
-import { Button, Title, IconButton, Text, Headline, Subheading, Card } from 'react-native-paper'
+import { Button, Title, IconButton, Text, Headline, Subheading, Card, Paragraph, Searchbar } from 'react-native-paper'
 import { NavigationScreenProp } from 'react-navigation'
 import { Transition } from 'react-navigation-fluid-transitions'
 import Header from 'src/components/Header'
@@ -38,6 +39,7 @@ export default function List ({ events, navigation }: Props) {
   return (
     <SectionList
       style={{ padding: 10 }}
+      stickyHeaderIndices={[0]}
       sections={normalizedEvents}
       stickySectionHeadersEnabled
       keyExtractor={(item, index) => item.id}
@@ -55,15 +57,20 @@ export default function List ({ events, navigation }: Props) {
         )
       }}
       renderItem={({ item }: RenderItem) => (
-        <Card style={s.card} onPress={() => handlePress(item.id)}>
+        <Card style={s.card} onPress={() => handlePress(item.id)} theme={{ roundness: 5 }}>
+          {
+            item.images.length > 0 && (
+              <Transition shared='image'>
+                <Card.Cover source={{ uri: item.images[0].thumbnail }} />
+              </Transition>
+            )
+          }
           <Card.Content>
             <Transition shared='title'>
-              <Headline>{item.title.charAt(0).toUpperCase() + item.title.slice(1)}</Headline>
+              <Subheading style={{ marginTop: 10 }}>{item.title.charAt(0).toUpperCase() + item.title.slice(1)}</Subheading>
             </Transition>
-            <Transition shared='address'>
-              <Address icon='map'>
-                {item.address}
-              </Address>
+            <Transition shared='description'>
+              <Paragraph numberOfLines={2}>{item.description}</Paragraph>
             </Transition>
             <Transition shared='categories'>
               <FlatList
@@ -98,7 +105,8 @@ export default function List ({ events, navigation }: Props) {
 
 const s = StyleSheet.create({
   card: {
-    marginLeft: 70,
+    overflow: 'hidden',
+    marginLeft: 60,
     marginBottom: 15,
     alignItems: 'flex-start'
   },
