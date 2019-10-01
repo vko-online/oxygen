@@ -44,7 +44,7 @@ export function getEvent (): Event {
       end: faker.random.boolean() && faker.date.future(0, future)
     },
     address: faker.address.streetAddress(),
-    reservable: faker.random.boolean(),
+    reservable: false,// faker.random.boolean(),
     images: Array.from({ length: faker.random.number({ min: 0, max: 2 }) }, getImage)
   }
 }

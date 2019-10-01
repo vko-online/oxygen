@@ -15,7 +15,7 @@ export default function EventItem ({ item, onPress }: Props) {
         {
           item.images.length > 0 && (
             <Transition shared='image'>
-              <Card.Cover source={{ uri: item.images[0].thumbnail }} />
+              <Card.Cover source={{ uri: item.images[0].thumbnail }} style={{ height: 100 }} />
             </Transition>
           )
         }

@@ -141,6 +141,7 @@ Screen.navigationOptions = {
 const s = StyleSheet.create({
   search: {
     flex: 1,
+    flexGrow: 1,
     elevation: 0,
     backgroundColor: '#fff'
   },
