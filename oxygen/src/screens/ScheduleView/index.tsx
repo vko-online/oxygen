@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FlatList, View } from 'react-native'
-import { Text, Title, Paragraph, Subheading, Button, Theme, Headline, IconButton } from 'react-native-paper'
+import { Text, Title, Paragraph, Subheading, Button, Theme, Headline, IconButton, Appbar } from 'react-native-paper'
 import { NavigationScreenProp } from 'react-navigation'
 import { Transition } from 'react-navigation-fluid-transitions'
+import Modal from 'modal-react-native-web'
 import Header, { HeaderWithBack } from 'src/components/Header'
 import Page from 'src/components/Page'
 import { findById } from 'src/screens/Schedule/data'
@@ -11,7 +12,9 @@ import Pane, { Hpane } from 'view-on-steroids'
 import moment from 'moment'
 import Divider from './divider'
 import Carousel from './carousel2'
-import { primary } from 'src/constants/Colors'
+import { primary, darkGray } from 'src/constants/Colors'
+import App from 'App'
+import Discussion from './discussion'
 
 const FORMAT = 'ddd. MMM DD, HH:MM'
 
@@ -22,6 +25,7 @@ interface Props {
   navigation: NavigationScreenProp<NavState, NavState>
 }
 export default function Screen ({ navigation }: Props) {
+  const [modalVisible, setVisiblity] = useState(false)
   const event = findById(navigation.state.params.id)
   if (!event) {
     navigation.navigate('Schedule')
@@ -49,7 +53,7 @@ export default function Screen ({ navigation }: Props) {
               <Subheading>{event.title.charAt(0).toUpperCase() + event.title.slice(1)}</Subheading>
               <Hpane justifyContent='flex-end' alignItems='center'>
                 <IconButton icon='share' onPress={() => null} color={primary} />
-                <Button icon='chat' onPress={() => null}>Discussion</Button>
+                <Button icon='chat' onPress={() => setVisiblity(true)}>Discussion</Button>
               </Hpane>
             </Hpane>
           </View>
@@ -105,6 +109,13 @@ export default function Screen ({ navigation }: Props) {
           }
         </Hpane>
       </Pane>
+      <Modal animationType='slide' visible={modalVisible} onRequestClose={() => setVisiblity(false)}>
+        <Appbar.Header theme={{ colors: { primary: '#fff' } }}>
+          <Appbar.Content title='Discussion' subtitle={event.title} />
+          <Appbar.Action icon='close' color={darkGray} onPress={() => setVisiblity(false)} />
+        </Appbar.Header>
+        <Discussion id={event.id} />
+      </Modal>
     </Page>
   )
 }
