@@ -5,14 +5,17 @@ import { find, categories } from 'src/screens/Discover/data'
 import { categoryIcon } from 'src/components/StyledText'
 import CardItemMinimal from 'src/screens/Discover/item.minimal'
 import Layout from 'src/constants/Layout'
-import { darkGray } from 'src/constants/Colors'
+import { darkGray, white } from 'src/constants/Colors'
 import Modal from 'react-native-modal'
 
 const events = find()
 
-export default function () {
+interface Props {
+  visible: boolean
+  onDismiss: () => void
+}
+export default function ({ visible, onDismiss }: Props) {
   const [query, setQuery] = useState(null)
-  const [modalVisible, setVisiblity] = useState(false)
   const [selectedCategories, setCategories] = useState<string[]>([])
   const hasFilter = query || selectedCategories.length
   const filteredEvents = hasFilter && [
@@ -28,16 +31,16 @@ export default function () {
   }, [])
 
   return (
-    <Modal animationIn='slideInUp' isVisible={modalVisible} onDismiss={() => setVisiblity(false)}>
+    <Modal style={{ zIndex: 100, position: 'absolute', top: 0, left: 0, right: 0 }} isVisible={visible} coverScreen hasBackdrop onDismiss={onDismiss}>
       <Appbar.Header theme={{ colors: { primary: '#fff' } }}>
         <Searchbar
           placeholder='Search'
           style={s.search}
           onChangeText={(text) => setQuery(text)}
         />
-        <Appbar.Action icon='close' color={darkGray} onPress={() => setVisiblity(false)} />
+        <Appbar.Action icon='close' color={darkGray} onPress={onDismiss} />
       </Appbar.Header>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: white }}>
         <FlatList
           style={{ margin: 10, flexGrow: 0 }}
           data={categories}
