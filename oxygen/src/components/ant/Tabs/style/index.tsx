@@ -9,7 +9,9 @@ export interface TabBarStyle {
 }
 export default (theme: Theme) =>
   StyleSheet.create<TabBarStyle>({
-    container: {},
+    container: {
+      paddingHorizontal: 10
+    },
     tabs: {
       flex: 1,
       flexDirection: 'row',
@@ -31,6 +33,7 @@ export default (theme: Theme) =>
       backgroundColor: theme.tabs_color
     },
     textStyle: {
-      fontSize: 15
+      fontSize: 14,
+      fontWeight: '300'
     }
   })

@@ -13,19 +13,19 @@ interface Props {
 function Header ({ navigation, title = 'Diet Doctor', subtitle, children }: Props) {
   return (
     <Appbar.Header theme={{ colors: { primary: '#fff' } }}>
-      <Appbar.Action icon='menu' color={darkGray} onPress={navigation.openDrawer} />
-      <Appbar.Content title={title} subtitle={subtitle} />
       {
         children || (
-          <TouchableOpacity
-            style={{ marginRight: 10 }}
-            onPress={() => navigation.navigate('Profile')}
-            activeOpacity={0.8}
-          >
-            <Avatar.Image size={30} source={require('src/assets/images/robot-dev.png')} />
-          </TouchableOpacity>
+          <Appbar.Action icon='magnify' color={darkGray} onPress={navigation.openDrawer} />
         )
       }
+      <Appbar.Content title={title} subtitle={subtitle} />
+      <TouchableOpacity
+        style={{ marginRight: 10 }}
+        onPress={() => navigation.navigate('Profile')}
+        activeOpacity={0.8}
+      >
+        <Avatar.Image size={30} source={require('src/assets/images/robot-dev.png')} />
+      </TouchableOpacity>
     </Appbar.Header>
   )
 }

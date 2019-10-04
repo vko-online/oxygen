@@ -16,5 +16,6 @@ export default function Screen ({}: Props) {
   )
 }
 Screen.navigationOptions = {
-  header: (props) => <Header title='Friends' {...props} />
+  title: 'Уведомления',
+  header: (props) => <Header title='Уведомления' {...props} />
 }

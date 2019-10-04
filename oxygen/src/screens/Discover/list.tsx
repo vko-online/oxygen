@@ -26,7 +26,7 @@ export default function List ({ events, navigation }: Props) {
   }))
 
   function handlePress (id) {
-    navigation.navigate('ScheduleView', { id })
+    navigation.navigate('DiscoverView', { id })
   }
   return (
     <SectionList

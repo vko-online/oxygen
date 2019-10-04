@@ -1,140 +1,175 @@
 import React from 'react'
 import { Platform } from 'react-native'
-import { Appbar, IconButton, Colors } from 'react-native-paper'
+import { Appbar, IconButton as MaterialIconButton, Colors } from 'react-native-paper'
 import {
   createStackNavigator,
   StackNavigatorConfig,
-  createDrawerNavigator
+  createDrawerNavigator,
+  createBottomTabNavigator,
+  BottomTabBar
 } from 'react-navigation'
 import {
   createFluidNavigator
 } from 'react-navigation-fluid-transitions'
 
-import HomeScreen from 'src/screens/Home'
-
-import ScheduleScreen from 'src/screens/Schedule'
-import ScheduleViewScreen from 'src/screens/ScheduleView'
-import AgendaScreen from 'src/screens/Agenda'
-import FriendsScreen from 'src/screens/Friends'
-import MapScreen from 'src/screens/Map'
+import MyScreen from 'src/screens/My'
+import DiscoverScreen from 'src/screens/Discover'
+import DiscoverViewScreen from 'src/screens/DiscoverView'
+import CreateScreen from 'src/screens/Create'
+import InboxScreen from 'src/screens/Inbox'
+import ProfileScreen from 'src/screens/Profile'
+import FavoriteScreen from 'src/screens/Favorite'
 
 import AboutScreen from 'src/screens/About'
-import ProfileScreen from 'src/screens/Profile'
+// import ProfileScreen from 'src/screens/Profile'
 
 import Drawer from './drawer'
+import { primary } from 'src/constants/Colors'
+
+function IconButton (props) {
+  return <MaterialIconButton size={30} {...props} style={{ padding: 0, margin: 0 }} />
+}
 
 const config: StackNavigatorConfig = Platform.select<StackNavigatorConfig>({
   web: { headerMode: 'screen' },
   default: {}
 })
 
-const HomeStack: any = createStackNavigator(
+const MyStack: any = createStackNavigator(
   {
-    Home: HomeScreen
+    My: MyScreen
   },
   config
 )
 
-HomeStack.navigationOptions = {
-  tabBarIcon: ({ focused }) => {
-    if (focused) {
-      return <IconButton icon='home' color={Colors.grey600} />
-    }
-    return <IconButton icon='home' color={Colors.grey300} />
-  }
-}
+MyStack.path = ''
 
-HomeStack.path = ''
-
-const ScheduleStack: any = createFluidNavigator(
+const DiscoverStack: any = createFluidNavigator(
   {
-    Schedule: ScheduleScreen,
-    ScheduleView: ScheduleViewScreen
+    Discover: DiscoverScreen,
+    DiscoverView: DiscoverViewScreen
   },
   config
 )
 
-ScheduleStack.navigationOptions = {
-  tabBarIcon: ({ focused }) => {
-    if (focused) {
-      return <IconButton icon='eventbrite' color={Colors.grey600} />
-    }
-    return <IconButton icon='eventbrite' color={Colors.grey300} />
-  }
-}
+DiscoverStack.path = ''
 
-ScheduleStack.path = ''
-
-const AgendaStack: any = createStackNavigator(
+const CreateStack: any = createStackNavigator(
   {
-    Agenda: AgendaScreen
+    Create: CreateScreen
   },
   config
 )
 
-AgendaStack.navigationOptions = {
-  tabBarIcon: ({ focused }) => {
-    if (focused) {
-      return <IconButton icon='view-agenda' color={Colors.grey600} />
-    }
-    return <IconButton icon='view-agenda' color={Colors.grey300} />
-  }
-}
+CreateStack.path = ''
 
-AgendaStack.path = ''
-
-const FriendsStack: any = createStackNavigator(
+const InboxStack: any = createStackNavigator(
   {
-    Friends: FriendsScreen
+    Inbox: InboxScreen
   },
   config
 )
 
-FriendsStack.navigationOptions = {
-  tabBarIcon: ({ focused }) => {
-    if (focused) {
-      return <IconButton icon='perm-contact-calendar' color={Colors.grey600} />
-    }
-    return <IconButton icon='perm-contact-calendar' color={Colors.grey300} />
-  }
-}
+InboxStack.path = ''
 
-FriendsStack.path = ''
-
-const MapStack: any = createStackNavigator(
+const FavoriteStack: any = createStackNavigator(
   {
-    Map: MapScreen
+    Favorite: FavoriteScreen
   },
   config
 )
 
-MapStack.navigationOptions = {
-  tabBarIcon: ({ focused }) => {
-    if (focused) {
-      return <IconButton icon='map' color={Colors.grey600} />
+const ProfileStack: any = createStackNavigator(
+  {
+    Profile: ProfileScreen
+  },
+  config
+)
+
+ProfileStack.path = ''
+
+const tabNavigator: any = createBottomTabNavigator({
+  MyStack: {
+    screen: MyStack,
+    navigationOptions: {
+      title: 'Для вас',
+      tabBarIcon: ({ focused }) => {
+        if (focused) {
+          return <IconButton icon='view-dashboard' color={Colors.grey600} />
+        }
+        return <IconButton icon='view-dashboard' color={Colors.grey300} />
+      }
     }
-    return <IconButton icon='map' color={Colors.grey300} />
+  },
+  DiscoverStack: {
+    screen: DiscoverStack,
+    navigationOptions: {
+      title: 'События',
+      tabBarIcon: ({ focused, tintColor }) => {
+        if (focused) {
+          return <IconButton icon='view-carousel' color={tintColor} />
+        }
+        return <IconButton icon='view-carousel' color={Colors.grey300} />
+      }
+    }
+  },
+  // CreateStack,
+  FavoriteStack: {
+    screen: FavoriteStack,
+    navigationOptions: {
+      title: 'Избранное',
+      tabBarIcon: ({ focused, tintColor }) => {
+        if (focused) {
+          return <IconButton icon='star' color={tintColor} />
+        }
+        return <IconButton icon='star' color={Colors.grey300} />
+      }
+    }
+  },
+  InboxStack: {
+    screen: InboxStack,
+    navigationOptions: {
+      title: 'Уведомления',
+      tabBarIcon: ({ focused, tintColor }) => {
+        if (focused) {
+          return <IconButton icon='bell' color={tintColor} />
+        }
+        return <IconButton icon='bell' color={Colors.grey300} />
+      }
+    }
   }
-}
-
-MapStack.path = ''
-
-const tabNavigator: any = createDrawerNavigator({
-  HomeStack,
-  ScheduleStack: ScheduleStack,
-  RecipesStack: AgendaStack,
-  FriendsStack: FriendsStack,
-  MapStack: MapStack
+  // ProfileStack
 }, {
-  contentComponent: (props) => <Drawer {...props} />
+  tabBarComponent: BottomTabBar,
+  initialRouteName: 'MyStack',
+  tabBarOptions: {
+    showLabel: true,
+    activeTintColor: primary,
+    labelStyle: {
+      fontFamily: 'opensans-semi-bold',
+      fontSize: 10
+    }
+  }
 })
 
-tabNavigator.path = ''
+tabNavigator.apply = ''
+
+// const drawerNavigator: any = createDrawerNavigator({
+//   MyStack,
+//   DiscoverStack,
+//   CreateStack,
+//   InboxStack,
+//   ProfileStack
+// }, {
+//   contentComponent: (props) => <Drawer {...props} />
+// })
+
+// drawerNavigator.path = ''
 
 const rootNavigator: any = createStackNavigator({
   Tabs: tabNavigator,
-  About: AboutScreen,
-  Profile: ProfileScreen
+  About: AboutScreen
+  // Profile: ProfileScreen
 }, {
   initialRouteName: 'Tabs',
   headerMode: 'none'

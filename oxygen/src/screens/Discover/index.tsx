@@ -28,8 +28,10 @@ export default function Screen ({ navigation }: Props) {
   const [modalVisible, setVisiblity] = useState(false)
   const [selectedCategories, setCategories] = useState<string[]>([])
   const tabs = [
-    { title: 'Discover' },
-    { title: 'Following' }
+    { title: 'Сегодня' },
+    { title: 'Рядом' },
+    { title: 'На неделе' },
+    { title: 'Кино' }
     // { title: 'Upcoming' }
   ]
 
@@ -48,11 +50,11 @@ export default function Screen ({ navigation }: Props) {
 
   return (
     <Page>
-      <Header title='Schedule'>
-        <Appbar.Action icon='filter' color={darkGray} onPress={() => setVisiblity(true)} />
-      </Header>
+      <Header title='События' />
       <Tabs tabs={tabs} initialPage={0}>
         <List events={events} navigation={navigation} />
+        <PastScene />
+        <PastScene />
         <PastScene />
         {/* <UpcomingScene /> */}
       </Tabs>

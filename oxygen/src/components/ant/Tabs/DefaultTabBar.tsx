@@ -189,7 +189,17 @@ export class DefaultTabBar extends React.PureComponent<PropsType, StateType> {
           {renderTab ? (
             renderTab(tab)
           ) : tab.title ? (
-            <Subheading>{tab.title}</Subheading>
+            <Subheading
+              style={[
+                {
+                  color: textColor,
+                  ...StyleSheet.flatten(styles.textStyle)
+                },
+                textStyle
+              ]}
+            >
+              {tab.title}
+            </Subheading>
           ) : (
             <Subheading
               style={[
