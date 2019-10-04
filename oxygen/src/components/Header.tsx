@@ -2,36 +2,26 @@ import React, { ReactNode, useState } from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { Appbar, Avatar } from 'react-native-paper'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
-import { primary, darkGray } from 'src/constants/Colors'
-import Search from './Search'
+import { darkGray } from 'src/constants/Colors'
 
 interface Props {
   title?: string
   subtitle?: string
   navigation: NavigationScreenProp<any, any>
-  children?: ReactNode
 }
-function Header ({ navigation, title = 'Diet Doctor', subtitle, children }: Props) {
-  const [modalVisible, setVisiblity] = useState(false)
+function Header ({ navigation, title = 'Diet Doctor', subtitle }: Props) {
   return (
-    <>
-      <Appbar.Header theme={{ colors: { primary: '#fff' } }}>
-        {
-          children || (
-            <Appbar.Action icon='magnify' color={darkGray} onPress={() => setVisiblity(true)} />
-          )
-        }
-        <Appbar.Content title={title} subtitle={subtitle} />
-        <TouchableOpacity
-          style={{ marginRight: 10 }}
-          onPress={() => navigation.navigate('Profile')}
-          activeOpacity={0.8}
-        >
-          <Avatar.Image size={30} source={require('src/assets/images/robot-dev.png')} />
-        </TouchableOpacity>
-      </Appbar.Header>
-      {/* <Search visible={modalVisible} onDismiss={() => setVisiblity(false)} /> */}
-    </>
+    <Appbar.Header theme={{ colors: { primary: '#fff' } }}>
+      <Appbar.Action icon='magnify' color={darkGray} onPress={() => navigation.navigate('Search')} />
+      <Appbar.Content title={title} subtitle={subtitle} />
+      <TouchableOpacity
+        style={{ marginRight: 10 }}
+        onPress={() => navigation.navigate('Profile')}
+        activeOpacity={0.8}
+      >
+        <Avatar.Image size={30} source={require('src/assets/images/robot-dev.png')} />
+      </TouchableOpacity>
+    </Appbar.Header>
   )
 }
 

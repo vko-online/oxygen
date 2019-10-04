@@ -12,7 +12,7 @@ interface Props {
 export default function EventItem ({ item, onPress, style }: Props) {
   return (
     <Card style={[s.card, style]} onPress={onPress} theme={{ roundness: 5 }}>
-        <Card.Content>
+        <Card.Content style={{ overflow: 'hidden' }}>
           <Subheading>{item.title}</Subheading>
           <Paragraph numberOfLines={1}>{item.description}</Paragraph>
           <FlatList
@@ -33,6 +33,7 @@ export default function EventItem ({ item, onPress, style }: Props) {
 
 const s = StyleSheet.create({
   card: {
+    overflow: 'hidden',
     alignItems: 'flex-start'
   }
 })

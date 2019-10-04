@@ -20,6 +20,8 @@ import InboxScreen from 'src/screens/Inbox'
 import ProfileScreen from 'src/screens/Profile'
 import FavoriteScreen from 'src/screens/Favorite'
 
+import SearchModal from 'src/screens/Search'
+
 import AboutScreen from 'src/screens/About'
 // import ProfileScreen from 'src/screens/Profile'
 
@@ -87,6 +89,18 @@ const ProfileStack: any = createStackNavigator(
 )
 
 ProfileStack.path = ''
+
+const ModalStack: any = createStackNavigator(
+  {
+    Search: SearchModal
+  },
+  {
+    ...config,
+    mode: 'modal'
+  }
+)
+
+ModalStack.path = ''
 
 const tabNavigator: any = createBottomTabNavigator({
   MyStack: {
@@ -168,7 +182,8 @@ tabNavigator.apply = ''
 
 const rootNavigator: any = createStackNavigator({
   Tabs: tabNavigator,
-  About: AboutScreen
+  About: AboutScreen,
+  Modals: ModalStack
   // Profile: ProfileScreen
 }, {
   initialRouteName: 'Tabs',
