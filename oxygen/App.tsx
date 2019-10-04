@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Platform, YellowBox, StatusBar, StyleSheet, View } from 'react-native'
-import { Provider } from 'react-native-paper'
+import { Provider, Portal } from 'react-native-paper'
 import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'

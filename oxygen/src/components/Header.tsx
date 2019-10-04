@@ -1,8 +1,9 @@
 import React, { ReactNode } from 'react'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import { Appbar, Avatar } from 'react-native-paper'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { primary, darkGray } from 'src/constants/Colors'
+import Search from './Search'
 
 interface Props {
   title?: string
@@ -26,6 +27,7 @@ function Header ({ navigation, title = 'Diet Doctor', subtitle, children }: Prop
       >
         <Avatar.Image size={30} source={require('src/assets/images/robot-dev.png')} />
       </TouchableOpacity>
+      <Search />
     </Appbar.Header>
   )
 }

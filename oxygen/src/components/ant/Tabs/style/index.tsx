@@ -10,7 +10,7 @@ export interface TabBarStyle {
 export default (theme: Theme) =>
   StyleSheet.create<TabBarStyle>({
     container: {
-      paddingHorizontal: 10
+      zIndex: 10
     },
     tabs: {
       flex: 1,

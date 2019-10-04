@@ -9,7 +9,7 @@ interface Props {
 export default function Screen ({ navigation }: Props) {
   return (
     <Page>
-      <Appbar.Header style={{ zIndex: 100 }} theme={{ colors: { primary: '#fff' } }}>
+      <Appbar.Header theme={{ colors: { primary: '#fff' } }}>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title='About' />
       </Appbar.Header>

@@ -93,11 +93,11 @@ const tabNavigator: any = createBottomTabNavigator({
     screen: MyStack,
     navigationOptions: {
       title: 'Для вас',
-      tabBarIcon: ({ focused }) => {
+      tabBarIcon: ({ focused, tintColor }) => {
         if (focused) {
-          return <IconButton icon='view-dashboard' color={Colors.grey600} />
+          return <IconButton icon='home' color={tintColor} />
         }
-        return <IconButton icon='view-dashboard' color={Colors.grey300} />
+        return <IconButton icon='home-outline' color={Colors.grey300} />
       }
     }
   },
@@ -107,9 +107,9 @@ const tabNavigator: any = createBottomTabNavigator({
       title: 'События',
       tabBarIcon: ({ focused, tintColor }) => {
         if (focused) {
-          return <IconButton icon='view-carousel' color={tintColor} />
+          return <IconButton icon='view-dashboard' color={tintColor} />
         }
-        return <IconButton icon='view-carousel' color={Colors.grey300} />
+        return <IconButton icon='view-dashboard-outline' color={Colors.grey300} />
       }
     }
   },
@@ -122,7 +122,7 @@ const tabNavigator: any = createBottomTabNavigator({
         if (focused) {
           return <IconButton icon='star' color={tintColor} />
         }
-        return <IconButton icon='star' color={Colors.grey300} />
+        return <IconButton icon='star-outline' color={Colors.grey300} />
       }
     }
   },
@@ -132,9 +132,9 @@ const tabNavigator: any = createBottomTabNavigator({
       title: 'Уведомления',
       tabBarIcon: ({ focused, tintColor }) => {
         if (focused) {
-          return <IconButton icon='bell' color={tintColor} />
+          return <IconButton icon='bell-ring' color={tintColor} />
         }
-        return <IconButton icon='bell' color={Colors.grey300} />
+        return <IconButton icon='bell-ring-outline' color={Colors.grey300} />
       }
     }
   }
@@ -147,7 +147,7 @@ const tabNavigator: any = createBottomTabNavigator({
     activeTintColor: primary,
     labelStyle: {
       fontFamily: 'opensans-semi-bold',
-      fontSize: 10
+      fontSize: 11
     }
   }
 })
@@ -172,7 +172,10 @@ const rootNavigator: any = createStackNavigator({
   // Profile: ProfileScreen
 }, {
   initialRouteName: 'Tabs',
-  headerMode: 'none'
+  headerMode: 'none',
+  cardStyle: {
+    zIndex: 10
+  }
 })
 
 rootNavigator.path = ''
